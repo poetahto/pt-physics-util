@@ -6,7 +6,7 @@ namespace poetools.Core.Abstraction.Unity
     public class CharacterControllerWrapper : PhysicsComponent
     {
         private CharacterController _character;
-        
+
         private void Awake()
         {
             _character = GetComponent<CharacterController>();
@@ -18,8 +18,10 @@ namespace poetools.Core.Abstraction.Unity
 
             if (Mathf.Round(_character.velocity.sqrMagnitude) < Mathf.Round(Velocity.sqrMagnitude))
                 Velocity = _character.velocity;
+
+            Physics.SyncTransforms();
         }
-        
+
         public override Vector3 Velocity { get; set; }
     }
 }

@@ -1,25 +1,22 @@
-﻿using System;
-using pt_player_3d.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DefaultNamespace
 {
     [RequireComponent(typeof(CharacterController))]
-    public class CharacterControllerGroundCheck : GroundCheck3d
+    public class CharacterControllerGroundCheck : SphereCastGroundCheck
     {
-        private CharacterController _characterController;
+        [SerializeField]
+        private CharacterController characterController;
 
-        private void Awake()
+        private void OnValidate()
         {
-            _characterController = GetComponent<CharacterController>();
-        }
-
-        public override bool IsGrounded => _characterController.isGrounded;
-
-        public override bool TryGetGround(out GroundData3d groundData3d)
-        {
-            groundData3d = default;
-            return false;
+            if (characterController != null)
+            {
+                center = (characterController.height - 3 * characterController.radius) * Vector3.down + characterController.center;
+                radius = characterController.radius;
+                maxDistance = characterController.skinWidth + 0.01f;
+                slopeLimit = characterController.slopeLimit;
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace pt_player_3d.Scripts.Movement
 {
     [RequireComponent(typeof(PhysicsComponent))]
-    public class PhysicsComponentDebugview : MonoBehaviour
+    public class PhysicsComponentDebugView : MonoBehaviour
     {
         private PhysicsComponent _physics;
 
